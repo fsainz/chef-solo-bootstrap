@@ -1,4 +1,4 @@
 // uncomment this recipe and comment the others in order to test
-//{ "recipes": "test::default" }
+{ "recipes": "test::default" }
 
-{ "recipes": "orly_dev::default" }
+//{ "recipes": "orly_dev::default" }
