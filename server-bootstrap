@@ -1,15 +1,28 @@
 apt-get update;
-apt-get -y install ruby ruby-dev libopenssl-ruby rdoc ri irb build-essential wget ssl-cert rsync;
+apt-get -y install build-essential wget curl ssl-cert rsync git-core;
+apt-get -y install git-core libreadline5-dev zlib1g-dev libssl-dev libxml2-dev libxslt1-dev;
+
+# In Case we want to install ruby without rvm
+# apt-get -y install ruby ruby-dev libopenssl-ruby rdoc ri irb;
+# cd /tmp;
+# wget http://production.cf.rubygems.org/rubygems/rubygems-1.8.10.tgz;
+# tar zxf rubygems-1.8.10.tgz;
+# cd rubygems-1.8.10;
+# ruby setup.rb --no-format-executable  --no-ri --no-rdoc;
+
 
 cd /tmp;
-wget http://production.cf.rubygems.org/rubygems/rubygems-1.8.10.tgz;
-tar zxf rubygems-1.8.10.tgz;
-cd rubygems-1.8.10;
+curl -s https://rvm.beginrescueend.com/install/rvm -o rvm-installer;
+chmod +x rvm-installer;
+./rvm-installer --version latest;
 
-ruby setup.rb --no-format-executable  --no-ri --no-rdoc;
+source /usr/local/rvm/bin/rvm;
+/usr/local/rvm/bin/rvm install 1.9.2;
+/usr/local/rvm/bin/rvm --default 1.9.2;
+echo 'source /usr/local/rvm/bin/rvm; /usr/local/rvm/bin/rvm use 1.9.2' >> /etc/profile;
 
-gem --no-rdoc --no-ri install chef;
+gem install chef --no-rdoc --no-ri;
+gem install ohai --no-rdoc --no-ri;
 
-gem --no-rdoc --no-ri install ohai;
-
+echo "\n\n INSTALLATION ENDED ************ \n\n ";
 exit;

@@ -12,7 +12,8 @@ task :bootstrap do
     puts "\n\n\n\nRAKE BOOTSTRAP >> Check your ssh connection to the host\n" 
     exit 1
   end
-  sh %{ssh -t -t #{ENV['server']} <<\\EOF
+  
+  sh %{ssh #{ENV['server']} <<\\EOF
     #{File.read("server-bootstrap")}
 EOF}
 end
