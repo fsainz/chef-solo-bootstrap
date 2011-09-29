@@ -6,7 +6,12 @@ task :bootstrap do
   if !ENV["server"]
     puts "You need to specify a server rake bootstrap server=whatever.com"
     exit 1
-  end  
+  end
+  success=system %{ssh #{ENV['server']} ls} # just to verify the connection is opened, add it to your know hosts
+  if !success
+    puts "\n\n\n\nRAKE BOOTSTRAP >> Check your ssh connection to the host\n" 
+    exit 1
+  end
   sh %{ssh -t -t #{ENV['server']} <<\\EOF
     #{File.read("server-bootstrap")}
 EOF}
