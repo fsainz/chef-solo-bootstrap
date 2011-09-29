@@ -1,11 +1,15 @@
 = DESCRIPTION:
 
+A slightly modified version from https://github.com/grempe/chef-solo-bootstrap
+
 Uses the Chef configuration management tool, specifically chef-solo to configure a remote server.  This is the simplest way to get started with using Chef.
 
-= REQUIREMENTS:
 
-* Make sure Chef is installed on the remote server you want to configure.  See chef_bootstrap.rb to help.
-* Modify config/chef.json to specify the recipes from the 'cookbooks' dir you want to run
+* Modify config/chef.json to specify the recipes from the 'cookbooks' dir you want to run.
+* Modify server-bootstrap if needed (tested with ubuntu 11.04)
+
+* Check configuration syntax with 'rake test'
+* Bootstrap server with 'rake bootstrap server=username@host.domain.com'
 * Run with 'rake cook server=username@host.domain.com'
 
 = HOW IT WORKS:

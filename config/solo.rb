@@ -1,10 +1,5 @@
-cookbook_path [ 
-                File.join(File.dirname(__FILE__), '..', "site-cookbooks"),
-                File.join(File.dirname(__FILE__), '..', "cookbooks")
-              ]
-
+cookbook_path File.join(Dir.pwd, "cookbooks")
 log_level :debug
-file_store_path File.join(File.dirname(__FILE__), '..')
-file_cache_path File.join(File.dirname(__FILE__), '..')
+file_store_path Dir.pwd
+file_cache_path Dir.pwd
 Chef::Log::Formatter.show_time = false
-

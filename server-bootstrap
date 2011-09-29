@@ -1,0 +1,11 @@
+apt-get install ruby ruby-dev libopenssl-ruby rdoc ri irb build-essential wget ssl-cert rsync
+
+cd /tmp
+wget http://production.cf.rubygems.org/rubygems/rubygems-1.8.10.tgz
+tar zxf rubygems-1.8.10.tgz
+cd rubygems-1.8.10
+ruby setup.rb --no-format-executable
+
+gem install chef
+
+gem install ohai

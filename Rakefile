@@ -1,5 +1,17 @@
 REMOTE_CHEF_PATH = "/etc/chef" # Where to find upstream cookbooks
 
+
+desc "Bootstrap remote server"
+task :bootstrap do
+  if !ENV["server"]
+    puts "You need to specify a server rake bootstrap server=whatever.com"
+    exit 1
+  end  
+  sh %{ssh -t -t #{ENV['server']} <<\\EOF
+    #{File.read("server-bootstrap")}
+EOF}
+end
+
 desc "Test your cookbooks and config files for syntax errors"
 task :test do
   Dir[ File.join(File.dirname(__FILE__), "**", "*.rb") ].each do |recipe|
@@ -11,7 +23,6 @@ task :test do
 end
 
 desc "Upload the latest copy of your cookbooks to remote server"
-#task :upload => [:test]  do
 task :upload do
   if !ENV["server"]
     puts "You need to specify a server rake upload server=whatever.com"
