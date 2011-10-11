@@ -47,6 +47,6 @@ task :cook => [:upload] do
   end
 
   puts "* Running chef solo on remote server *"
-  sh "ssh #{ENV['server']} \"cd #{REMOTE_CHEF_PATH}; chef-solo -l debug -c config/solo.rb -j config/chef.json \""
+  sh "ssh #{ENV['server']} \"cd #{REMOTE_CHEF_PATH}; source /etc/profile;  chef-solo -l debug -c config/solo.rb -j config/chef.json \""  
 end
 

@@ -1,6 +1,6 @@
 apt-get update;
 apt-get -y install build-essential wget curl ssl-cert rsync git-core;
-apt-get -y install git-core libreadline5-dev zlib1g-dev libssl-dev libxml2-dev libxslt1-dev;
+apt-get -y install libreadline5-dev zlib1g-dev libssl-dev libxml2-dev libxslt1-dev;
 
 # In Case we want to install ruby without rvm
 # apt-get -y install ruby ruby-dev libopenssl-ruby rdoc ri irb;
@@ -19,10 +19,24 @@ chmod +x rvm-installer;
 source /usr/local/rvm/bin/rvm;
 /usr/local/rvm/bin/rvm install 1.9.2;
 /usr/local/rvm/bin/rvm --default 1.9.2;
-echo 'source /usr/local/rvm/bin/rvm; /usr/local/rvm/bin/rvm use 1.9.2' >> /etc/profile;
+/usr/local/rvm/bin/rvm gemset create orly;
+/usr/local/rvm/bin/rvm use 1.9.2@orly;
 
+#echo 'source /usr/local/rvm/bin/rvm > /dev/null; /usr/local/rvm/bin/rvm use 1.9.2@orly' >> /etc/profile;
+
+# http://stackoverflow.com/questions/5792707/cannot-change-rvm-gemset-from-shell-script-via-rvm-gemset-use
+# http://stackoverflow.com/questions/5352827/why-doesnt-rvm-work-in-a-bash-script-like-it-works-in-an-interactive-shell
+# http://stackoverflow.com/questions/496702/can-a-shell-script-set-environment-variables-of-the-calling-shell
+# http://blog.ninjahideout.com/posts/rvm-system-wide-installs-and-capistrano-integration
+
+echo "[[ -s '/usr/local/lib/rvm' ]] && source '/usr/local/lib/rvm';" >> /etc/profile
+echo "rvm use 1.9.2@orly;" >> /etc/profile
+
+source /etc/profile;
 gem install chef --no-rdoc --no-ri;
 gem install ohai --no-rdoc --no-ri;
+
+touch /etc/bootstrapped;
 
 echo "\n\n INSTALLATION ENDED ************ \n\n ";
 exit;
