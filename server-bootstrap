@@ -19,8 +19,7 @@ chmod +x rvm-installer;
 source /usr/local/rvm/bin/rvm;
 /usr/local/rvm/bin/rvm install 1.9.2;
 /usr/local/rvm/bin/rvm --default 1.9.2;
-/usr/local/rvm/bin/rvm gemset create orly;
-/usr/local/rvm/bin/rvm use 1.9.2@orly;
+/usr/local/rvm/bin/rvm use 1.9.2@orly --create;
 
 #echo 'source /usr/local/rvm/bin/rvm > /dev/null; /usr/local/rvm/bin/rvm use 1.9.2@orly' >> /etc/profile;
 
